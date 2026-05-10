@@ -1,0 +1,56 @@
+{
+    "id": "lotmsystem",
+    "title": "Lord of the Mysteries",
+    "description": "A world filled with the supernatural, can you attain godhood?",
+    "compatibility": {
+        "minimum": "13",
+        "verified": "13"
+    },
+    "authors": [{
+        "name": "CokeAndCyanide",
+        "discord": "CokeAndCyinide"
+    }],
+    "esmodules": ["module/lotmsystem.mjs"],
+    "styles": ["module/styles/system-styles.css"],
+    "documentTypes": {
+        "Actor":{
+            "character": {},
+            "npc": {}
+        },
+        "Item": {
+            "sealed-artifact": {},
+            "weapon": {},
+            "artifact": {},
+            "main-ingredient": {},
+            "secondary-ingredient": {}
+        }
+    },
+    "packs": [{
+        "name": "monsters",
+        "label": "LotM Monsters",
+        "type": "Actor"
+    },
+    {
+        "name": "beyonders",
+        "label": "Beyonders",
+        "type": "Actor"
+    },
+    {
+        "name": "items",
+        "label": "LotM Items",
+        "type": "Item"
+    }],
+    "languages": [{
+        "lang": "en",
+        "name": "English",
+        "path": "lang/en.json"
+    }],
+    "socket": false,
+    "initiative": "1d20",
+    "grid": {
+        "distance": 10,
+        "units": "ft"
+    },
+    "primaryTokenAttribute": "resources.health",
+    "secondaryTokenAttribute": "resources.spirituality"
+}
