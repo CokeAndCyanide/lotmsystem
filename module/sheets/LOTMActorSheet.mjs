@@ -8,7 +8,8 @@ export class LOTMActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorS
         classes: ["lotmsystem", "actor", "standard-form"],
         form: {
             handler: LOTMActorSheet.#onSubmit,
-            closeOnSubmit: true
+            submitOnChange: true,
+            closeOnSubmit: false
         },
         position: {
             width: 600,
