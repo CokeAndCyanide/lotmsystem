@@ -45,6 +45,8 @@ export class LOTMActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorS
         };
 
         parts.main.template = templates[type] ?? templates["default"];
+
+        return parts;
     }
 
     async _prepareContext(options) {
@@ -100,8 +102,7 @@ export class LOTMActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorS
     }
 
     static async #onSubmit(event, form, formData) {
-        const settings = foundry.utils.expandObject(formData.object);
-        await Promise.all(Object.entries(settings).map(([key, value]) => game.settings.set("lotmsystem", key, value)));
+        return this.document.update(formData.object);
     }
 
     async _onRender(context, options) {
