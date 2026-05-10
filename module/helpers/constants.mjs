@@ -1,1 +1,1 @@
-export const systemPath = "ystems/lotmsystem";
+export const systemPath = "systems/lotmsystem";

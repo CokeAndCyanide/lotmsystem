@@ -40,6 +40,7 @@ Hooks.once("init", function() {
         label: "LOTMSYSTEM.SheetLabels.ActorSheet"
     });
     console.log(`LotmActorSheet: ${LOTMActorSheet}`);
+    console.log(`Config actor classes: ${CONFIG.Actor.sheetClasses}`)
     console.log(`Actor Sheet: ${foundry.documents.collections.Actors.registeredSheets}`);
     /* Items.registerSheet("lotmsystem", LOTMItemSheet, {
         makeDefault: true,

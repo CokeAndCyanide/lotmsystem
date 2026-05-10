@@ -29,7 +29,7 @@
                         <input type="text" name="system.stats.{{key}}.value" value="{{stat.value}}" data-dtype="Number"/>
                         <span class="stat-mod">{{numberFormat stat.mod decimals=0 sign=true}}</span>
                     </div>
-                {/each}
+                {{/each}}
             </div>
         </div>
     </header>
@@ -51,7 +51,7 @@
                                 <input type="text" name="system.stats.{{key}}.value" value="{{stat.value}}" data-dtype="Number"/>
                                 <span class="stat-mod rollable" data-roll="d20+@stats.{{key}}.mod" data-label="{{stat.label}}">{{numberFormat stat.mod decimals=0 sign=true}}</span>
                             </div>
-                        {/each}
+                        {{/each}}
                     </div>
                 </aside>
             </section>

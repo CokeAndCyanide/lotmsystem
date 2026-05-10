@@ -49,7 +49,7 @@ export class LOTMActor extends Actor {
 
         if (data.stats) {
             for (let[key, value] of Object.entries(data.stats)) {
-                data[k] = foundry.utils.deepClone(value);
+                data[key] = foundry.utils.deepClone(value);
             }
         }
         

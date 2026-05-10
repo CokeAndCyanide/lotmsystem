@@ -7,7 +7,8 @@ export class LOTMActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorS
         id: "actor-sheet",
         classes: ["lotmsystem", "actor", "standard-form"],
         form: {
-            submitOnChange: true
+            handler: LOTMActorSheet.#onSubmit,
+            closeOnSubmit: true
         },
         position: {
             width: 600,
@@ -34,13 +35,20 @@ export class LOTMActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorS
         return this.document;
     }
 
-    _getTemplatePath() {
-        return `${systemPath}/module/templates/actors/actor-${this.actor.type}-sheet.html`;
+    _configureRenderParts(options) {
+        const parts = foundry.utils.deepClone(super._configureRenderParts(options))
+        const type = this.actor.type;
+        const templates = {
+            default: `${systemPath}/module/templates/actors/actor-sheet.html`,
+            character: `${systemPath}/module/templates/actors/actor-character-sheet.html`,
+            npc: `${systemPath}/module/templates/actors/actor-sheet.html`
+        };
+
+        parts.main.template = templates[type] ?? templates["default"];
     }
 
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
-        
         const actorData = this.actor;
 
         context.actor = actorData;
@@ -59,7 +67,7 @@ export class LOTMActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorS
 
         context.rollData = actorData.getRollData();
 
-        context.effects = prepareActiveEffectCategories(this.actor.AllApplicableEffects());
+        // context.effects = prepareActiveEffectCategories(this.actor.AllApplicableEffects());
 
         return context;
     }
@@ -91,6 +99,11 @@ export class LOTMActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorS
         }
     }
 
+    static async #onSubmit(event, form, formData) {
+        const settings = foundry.utils.expandObject(formData.object);
+        await Promise.all(Object.entries(settings).map(([key, value]) => game.settings.set("lotmsystem", key, value)));
+    }
+
     async _onRender(context, options) {
         await super._onRender(context, options);
     }
@@ -110,32 +123,4 @@ export class LOTMActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorS
 
         return await Item.create(itemData, {parent: this.actor});
     }
-}
-
-function prepareActiveEffectCategories() {
-    const categories = {
-        temporary: {
-            type: "temporary",
-            label: game.i18n.localize(`LOTMSYSTEM.Effect.Temporary`),
-            effects: []
-        },
-        passive: {
-            type: "passive",
-            label: game.i18n.localize(`LOTMSYSTEM.Effect.Passive`),
-           effects: []
-        },
-        inactive: {
-            type: "inactive",
-            label: game.i18n.localize(`LOTMSYSTEM.Effect.Inactive`),
-            effects: []
-        }
-    };
-
-    for (let e of effects) {
-        if (e.disabled) categories.inactive.push(e);
-        else if (e.isTemporary) categories.temporary.push(e);
-        else categories.passive.push(e);
-    }
-
-    return categories;
 }
