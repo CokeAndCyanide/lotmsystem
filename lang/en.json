@@ -1,0 +1,15 @@
+{
+    "LOTMSYSTEM": {
+        "weaponTypes": {
+            "none": "None",
+            "melee": "Melee",
+            "gun": "Gun",
+            "bow": "Bow"
+        },
+        "weaponStats": {
+            "damage": "Damage",
+            "range": "Range",
+            "wType": "Weapon Type"
+        }
+    }
+}

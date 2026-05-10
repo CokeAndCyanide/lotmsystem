@@ -1,0 +1,29 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64">
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"></h1>
+    </header>
+    <div>
+        <table>
+            <tr>
+                <th>{{localize "lotmsystem.weaponStats.damage"}}</th>
+                <th>{{localize "lotmsystem.weaponStats.range"}}</th>
+                <th>{{localize "lotmsystem.weaponStats.wType"}}</th>
+            </tr>
+            <tr>
+                <td>
+                    <input name="system.damage" type="number" value="{{system.damage}}" />
+                </td>
+                <td>
+                    <input name="system.range" type="number" value="{{system.range}}" />
+                </td>
+                <td>
+                    <select name="system.wType">
+                        {{selectOptions config.wTypes selected=system.wType localize=true}}
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <textarea name="system.description">{{system.description}}</textarea>
+    </div>
+</form>

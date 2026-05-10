@@ -1,0 +1,60 @@
+<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
+            <div class="resources grid grid-2col">
+                <div class="resource flex-group-center">
+                    <label for="system.health.value" class="resource-label">Health</label>
+                    <div class="resource-context flexrow flex-center flex-between">
+                        <input type="text" name="system.health.value" value="{{system.health.value}}" data-dtype="Number"/>
+                        <span> / </span>
+                        <input type="text" name="system.health.max" value="{{system.health.value}}" data-dtype="Number"/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.health.value" class="resource-label">Spirituality</label>
+                    <div class="resource-context flexrow flex-center flex-between">
+                        <input type="text" name="system.spirituality.value" value="{{system.spirituality.value}}" data-dtype="Number"/>
+                        <span> / </span>
+                        <input type="text" name="system.spirituality.max" value="{{system.spirituality.value}}" data-dtype="Number"/>
+                    </div>
+                </div>
+            </div>
+            <div class="resources grid grid-3col">
+                {{#each system.stats as |stat key|}}
+                    <div class="stat flexrow flex-group-center">
+                        <label for="system.stats.{{key}}.value" class="resource-label">{{key}}</label>
+                        <input type="text" name="system.stats.{{key}}.value" value="{{stat.value}}" data-dtype="Number"/>
+                        <span class="stat-mod">{{numberFormat stat.mod decimals=0 sign=true}}</span>
+                    </div>
+                {/each}
+            </div>
+        </div>
+    </header>
+
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="description">Description</a>
+        <a class="item" data-tab="items">Items</a>
+    </nav>
+
+    <section class="sheet-body">
+        <div class="tab features" data-group="primary" data-tab="features">
+            <section class="grid grid-3col">
+                <aside class="sidebar">
+                    <div class="stats flexcol">
+                        {{#each system.stats as |stat key|}}
+                            <div class="stat flexrow flex-group-center">
+                                <label for="system.stats.{{key}}.value" class="resource-label rollable flexlarge align-left" data-roll="d20+@stats.{{key}}.mod"
+                                data-label="{{stat.label}}">{{stat.label}}</label>
+                                <input type="text" name="system.stats.{{key}}.value" value="{{stat.value}}" data-dtype="Number"/>
+                                <span class="stat-mod rollable" data-roll="d20+@stats.{{key}}.mod" data-label="{{stat.label}}">{{numberFormat stat.mod decimals=0 sign=true}}</span>
+                            </div>
+                        {/each}
+                    </div>
+                </aside>
+            </section>
+        </div>
+    </section>
+</form>
